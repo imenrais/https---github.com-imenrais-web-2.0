@@ -16,12 +16,29 @@ class ServiceController extends AbstractController
         ]);
     }
 
-    #[Route('/showService/{name}', name: 'showService')]
-    public function showService($name): Response
+    #[Route('/showService', name: 'showService')]
+    public function showService(): Response
 {
-    return new Response('<h1>Service: </h1>'.$name);
+        $authors = array(
+            array('id' => 1, 'picture' => '/images/Victor-Hugo.jpg','username' => 'Victor Hugo', 'email' => 'victor.hugo@gmail.com ', 'nb_books' => 100),
+            array('id' => 2, 'picture' => '/images/william-shakespeare.jpg','username' => ' William Shakespeare', 'email' =>  ' william.shakespeare@gmail.com', 'nb_books' => 200 ),
+            array('id' => 3, 'picture' => '/images/Taha_Hussein.jpg','username' => 'Taha Hussein', 'email' => 'taha.hussein@gmail.com', 'nb_books' => 300),
+            );
+            if (!isset($authors) || empty($authors)) 
+            {
+                return $this->render('service/noAuthors.html.twig');
+                {% for $authors in $authors %}
+               {{ author['username']|upper }}
+                 {% endfor %}
+                echo "Nombre d'auteurs : " . count($authors);
+            }
+            
+            
     
-}#[Route('/goToIndex', name: 'goToIndex')]
+    return $this->render('service/showService.html.twig',['auth'=>$authors]);
+    
+}
+#[Route('/goToIndex', name: 'goToIndex')]
     public function goToIndex(): Response
 {
     return $this->render('home/index.html.twig');

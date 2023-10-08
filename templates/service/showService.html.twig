@@ -1,1 +1,10 @@
-<h1>Service: {{name}} </h1>
+{% set x=5 %}
+{{x}}
+{{dump(auth)}}
+{% for i in auth %}
+{{i.username}}
+<img src="{{i.picture}}">
+{% if (i.nb_books>0) %}
+<input type='submit' value='buy'>
+{% endif %}
+{% endfor %}
